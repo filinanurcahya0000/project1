@@ -26,25 +26,27 @@ tidy=TRUE, tidy.opts=list(width.cutoff=60), R.options=list(max.print=100))
 Paragraph or two introducing your datasets and variables, why they are interesting to you, etc.
 
 ```{R}
-# read your datasets in here, e.g., with read_csv()
-
+MinimumWageDataSet <- read.csv("Minimum Wage Data (1).csv")
+COVID19Dataset <- read.csv("COVID19_state.csv")
+MinimumWageDataSet <- MinimumWageDataSet[MinimumWageDataSet$Year == 2020,]
 ```
+
+My first dataset is reporting the infection and death rates for each state for 2020. My second dataset contains the minimum wage for each state in 2020. I would like to investigate the correlation between wealth and the severity of COVID within each state. This information would be interesting because it could show how people in different socioeconomic statues have been affected by the pandemic. 
 
 #### Tidying: Reshaping
 
 If your datasets are tidy already, demonstrate that you can reshape data with pivot wider/longer here (e.g., untidy and then retidy). Alternatively, it may be easier to wait until the wrangling section so you can reshape your summary statistics. Note here if you are going to do this.
 
 ```{R}
-# your tidying code (if applicable; can also wait until wrangling section)
+library(tidyverse)
+
 ```
 
     
 #### Joining/Merging
 
 ```{R}
-# your joining code
 
-# your joining code
 ```
 
 Discussions of joining here. Feel encouraged to break up into more than once code chunk and discuss each in turn.
