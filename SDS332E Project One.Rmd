@@ -25,13 +25,20 @@ tidy=TRUE, tidy.opts=list(width.cutoff=60), R.options=list(max.print=100))
 
 Paragraph or two introducing your datasets and variables, why they are interesting to you, etc.
 
+
+
 ```{R}
+# Importing the First Dataset and Indexing Desired Variables. 
 MinimumWageDataSet <- read.csv("Minimum Wage Data (1).csv")
+MinimumWageDataSet <- MinimumWageDataSet[,c(1,2,7)]
+
+# Importing the First Dataset and Indexing Desired Variables. 
 COVID19Dataset <- read.csv("COVID19_state.csv")
+COVID19Dataset <- COVID19Dataset[,c(1:5)]
+
+# Indexing Out the Desired Rows with the Desired Year. 
 MinimumWageDataSet <- MinimumWageDataSet[MinimumWageDataSet$Year == 2020,]
 ```
-
-My first dataset is reporting the infection and death rates for each state for 2020. My second dataset contains the minimum wage for each state in 2020. I would like to investigate the correlation between wealth and the severity of COVID within each state. This information would be interesting because it could show how people in different socioeconomic statues have been affected by the pandemic. 
 
 #### Tidying: Reshaping
 
@@ -39,26 +46,41 @@ If your datasets are tidy already, demonstrate that you can reshape data with pi
 
 ```{R}
 library(tidyverse)
-
 ```
 
     
 #### Joining/Merging
 
 ```{R}
+# Unique IDs in Each Dataset.
+COVID19Dataset %>% select(State) %>% summarise_all(n_distinct)
+MinimumWageDataSet %>% select(State) %>% summarise_all(n_distinct)
+
+# Joining Datasets based on ID. 
+combineddataset <- inner_join(COVID19Dataset, MinimumWageDataSet, by = "State")
+
+# Seeing which were dropped from the Dataset.
+# Seeing which IDs appeared in one but not the other. 
+anti_join(MinimumWageDataSet, COVID19Dataset, by = "State")
+
+anti_join(COVID19Dataset, MinimumWageDataSet, by = "State")
 
 ```
-
-Discussions of joining here. Feel encouraged to break up into more than once code chunk and discuss each in turn.
 
 ####  Wrangling
 
 ```{R}
-# your wrangling code
+# Use Mutate to Create a New Variable.
+combineddataset %>% mutate(deathrate = Deaths/Population)
 
-# your wrangling code
+# Use a Stringr Function with Regex Once. 
 
-# your wrangling code
+# Create Summary Statistics of All Numeric Data. 
+
+# Create Summary Statistics of All Numeric Data after Grouping. 
+
+# Compute a Summary Statistic with a User-Defined Function. 
+
 ```
 
 Your discussion of wrangling section here. Feel encouraged to break up into more than once code chunk and discuss each in turn.
