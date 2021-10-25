@@ -3,13 +3,13 @@ title: 'Project 1: Wrangling, Exploration, Visualization'
 author: "SDS322E"
 date: ''
 output:
-  pdf_document:
-    toc: no
   html_document:
     toc: yes
     toc_float:
       collapsed: no
       smooth_scroll: yes
+  pdf_document:
+    toc: no
 ---
 
 ```{r setup, include=FALSE}
@@ -199,6 +199,7 @@ This plot shows that the death rate increases with testing rate with states with
 #### Concluding Remarks
 
 This study pretty much confirmed my suspicions about the situation surrounding the conditions that people have to go to because of the pandemic outside of the testing and death rate relationship. It really shows the disparity that people experience within the same country. 
+
 
 
 
