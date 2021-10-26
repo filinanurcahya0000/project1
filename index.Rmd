@@ -56,18 +56,18 @@ combineddataset <-
   inner_join(COVID19Dataset, MinimumWageDataSet, by = "State")
 
 # Making the data set longer.
-untidydataset <-
-  combineddataset %>% pivot_longer(2:7, names_to = "Catergories", values_to = "Numbers")
+untidydataset <- 
+  combineddataset %>% pivot_longer(2:7, names_to = "Categories", values_to = "Numbers")
 
 untidydataset %>% glimpse()
 
 # Making the data set wider (back to original data set).
 retidieddataset <-
-  untidydataset %>% pivot_wider(names_from = Catergories, values_from = Numbers)
+  untidydataset %>% pivot_wider(names_from = Categories, values_from = Numbers)
 
 retidieddataset %>% glimpse()
 ```
-
+I chose the pivot_longer() and pivot_wider() function to untidy and tidy the combined data set I got. First, since my data set was already relatively neat, I chose to untidy the data set. I took columns 2 to 7 and set the column names to a column named "Categories" and took the values below those column names, setting them to a column named "Numbers". Then, I chose to retidy the data set by taking the names from the "Categories" column and the values from the "Numbers" column. This takes the different values in the "Categories" column and makes them column names. It also takes the values in the "Numbers" column and sorts them below the column names they were beside in the untidy dataset. 
     
 #### Joining/Merging
 
@@ -89,6 +89,7 @@ anti_join(MinimumWageDataSet, COVID19Dataset, by = "State") %>% summarise(count 
 anti_join(COVID19Dataset, MinimumWageDataSet, by = "State")
 anti_join(COVID19Dataset, MinimumWageDataSet, by = "State") %>% summarise(count = n())
 ```
+I merged by two data sets by state using inner join. I chose to join the two data sets by using inner join because I'm trying to find the information for the states in common. This is because any states that are not present in both of the data sets will have missing information. By dropping the states that don't have a match in both data sets, we would create a new data set that has all the information needed. The original data sets had 51 and 54 observations, however, the final data set has 51 observations. That means 3 observations were dropped for not being in both data sets. The unique IDs and the observations that the data sets have in common include all 50 states and Washington DC. The minimum wage data set has 3 extra observations which are Guam, Puerto Rico, and the US Virgin Islands (which are outside of the continental US). A potential problem is that the information would be incomplete. 
 
 ####  Wrangling
 
