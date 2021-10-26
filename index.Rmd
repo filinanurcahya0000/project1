@@ -181,18 +181,18 @@ I found several interesting pieces of information when grouping the data and sum
 #### Visualizing
 
 ```{R}
-combineddataset2 %>% ggplot(aes(Minimum_Wage, Death_Rate, col = Testing_Rate)) + geom_point() + geom_smooth(method = "lm", se = FALSE, col = "darkseagreen4") + xlab("Minimum Wage ($)") + ylab("Death Rate") + theme(legend.position = "none") + ggtitle("Death Rate against \n Minimum Wage") + theme_bw()
+combineddataset2 %>% ggplot(aes(Minimum_Wage, Death_Rate, col = Testing_Rate)) + geom_point() + geom_smooth(method = "lm", se = FALSE, col = "darkseagreen4") + xlab("Minimum Wage ($)") + ylab("Death Rate") + theme(legend.position = "none") + ggtitle("Death Rate against \n Minimum Wage") + theme_bw() + scale_y_continuous(limits = c(0,0.002))
 ```
 
 This plot shows a positive, linear relationship between the minimum wage($) and the death rate. This means that the death rate increases with the minimum wage. This was not the relationship I was expecting as I thought higher minimum wages means more access to health care. However, this relationship may be because the higher cost of living in those areas mean that people have less disposable income. This relationship is to be expected. 
 
 ```{R}
-combineddataset2 %>% ggplot(aes(Population, Death_Rate, col = Testing_Rate)) + geom_point() + geom_smooth(method = "lm", se = FALSE, col = "darkseagreen4") + xlab("Population") + ylab("Death Rate") + theme(legend.position = "none") + ggtitle("Death Rate against Population") + scale_color_viridis_c() + geom_line() + theme_bw()
+combineddataset2 %>% ggplot(aes(Population, Death_Rate, col = Testing_Rate)) + geom_point() + geom_smooth(method = "lm", se = FALSE, col = "darkseagreen4") + xlab("Population") + ylab("Death Rate") + theme(legend.position = "none") + ggtitle("Death Rate against Population") + scale_color_viridis_c() + geom_line() + theme_bw() + scale_x_continuous(limits = c(0,40000000))
 ```
 This plot shows a positive, linear trend between the population size and the death rate of a state. This means that the death rate increases with population size. This may be because the lack of supply for health care supplies and services vs the demand. The hospitals in the more populated areas may be more overwhelmed by the demand than those in less populated areas. This may lead to people dying from there not being help available to them. The virus may be more susceptible to being spread in more densely populated areas. This relationship is to be expected. 
 
 ```{R}
-combineddataset2 %>% ggplot(aes(Testing_Level, Death_Rate, fill = Testing_Level)) + geom_bar(stat = "summary") + xlab("Testing Level") + ylab("Death Rate") + theme(legend.position = "none") + ggtitle("Death Rate against Testing Level") + geom_jitter() + theme_bw()
+combineddataset2 %>% ggplot(aes(Testing_Level, Death_Rate, fill = Testing_Level)) + geom_bar(stat = "summary") + xlab("Testing Level") + ylab("Death Rate") + theme(legend.position = "none") + ggtitle("Death Rate against Testing Level") + geom_jitter() + theme_bw() + scale_y_continuous(n.breaks = 10)
 ```
 This plot shows that the death rate increases with testing rate with states with more than half the population being testing having a higher death rate than states with less than half the population tested. This relationship is rather unexpected as you would think that people who got tested would be taking more precautions against the virus. This relationship may be because states with higher death rates are pushing harder against testing leading to testing being more available to the public.
 
